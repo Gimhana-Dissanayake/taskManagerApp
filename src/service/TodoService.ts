@@ -4,16 +4,9 @@ import { UpdateTodoDto } from "../dtos/UpdateTodoDto";
 
 class TodoService {
   getTodos() {
-    let username = "Gim";
-    let password = "gim";
 
-    let basicAuthHeader = "Basic " + window.btoa(username + ":" + password);
 
-    return axios.get("http://localhost:8081/users/username/todos", {
-      headers: {
-        authorization: basicAuthHeader,
-      },
-    });
+    return axios.get("http://localhost:8081/users/username/todos");
   }
 
   getTodosById(id: number) {

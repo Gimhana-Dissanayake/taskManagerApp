@@ -11,8 +11,10 @@ const Login = () => {
   const passwordChangeHandler = (value: string) => {
     setState((ps) => ({ ...ps, password: value }));
   };
-  const loginHandler = () => {
-    user.login(state.username);
+  const loginHandler = async () => {
+    try {
+      await user.login(state.username);
+    } catch (e) {}
   };
   return (
     <div>

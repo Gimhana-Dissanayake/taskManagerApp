@@ -6,6 +6,7 @@ import {
   useMemo,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthService from "../service/AuthService";
 import { useLocalStorage } from "./useLocalStorage";
 
 type authContextType = {
@@ -34,8 +35,13 @@ export const AuthProvider = ({ children }: Props) => {
 
   const login = useCallback(
     async (data: any) => {
+
+      AuthService.setUpAxiosInterceptors(data)
       setUser(data);
       navigate("/auth/welcome", { replace: true });
+      
+     
+      
     },
     [setUser, navigate]
   );
