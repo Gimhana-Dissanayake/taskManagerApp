@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AppUser } from "../constants";
 import { useAuth } from "../hooks/useAuth";
+import AuthService from "../service/AuthService";
 
 const Login = () => {
-  const user = useAuth();
+  const AUTH = useAuth();
+  const navigate = useNavigate();
   const [state, setState] = useState({ username: "", password: "" });
   const usernameChangeHandler = (value: string) => {
     setState((ps) => ({ ...ps, username: value }));
@@ -12,9 +16,20 @@ const Login = () => {
     setState((ps) => ({ ...ps, password: value }));
   };
   const loginHandler = async () => {
+    const creds = { username: state.username, password: state.password };
+
     try {
-      await user.login(state.username);
-    } catch (e) {}
+      const response = await AUTH.login(creds);
+      const user: AppUser = {
+        username: state.username,
+        token: response.data.token || null,
+      };
+      AUTH.setAppUser(user);
+      AuthService.setUpAxiosInterceptors(user);
+      navigate("/auth/welcome", { replace: true });
+    } catch (e) {
+      console.log("ERROR");
+    }
   };
   return (
     <div>

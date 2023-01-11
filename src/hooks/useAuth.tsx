@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import {
   createContext,
   ReactNode,
@@ -6,17 +7,24 @@ import {
   useMemo,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  AppUser,
+  LoginCredentials,
+  USER_NAME_SESSION_ATTRIBUTE_NAME,
+} from "../constants";
 import AuthService from "../service/AuthService";
 import { useLocalStorage } from "./useLocalStorage";
 
 type authContextType = {
   user: any;
-  login: (data: any) => Promise<void>;
+  setAppUser: (creds: AppUser) => void;
+  login: (data: LoginCredentials) => Promise<AxiosResponse<any, any>>;
   logout: () => void;
 };
 
 const authContextDefaultValues: authContextType = {
   user: null,
+  setAppUser: () => {},
   login: () => {
     return new Promise(() => {});
   },
@@ -30,21 +38,23 @@ type Props = {
 const AuthContext = createContext<authContextType>(authContextDefaultValues);
 
 export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useLocalStorage("todoAuthUser", null);
+  const [user, setUser] = useLocalStorage(
+    USER_NAME_SESSION_ATTRIBUTE_NAME,
+    null
+  );
   const navigate = useNavigate();
 
-  const login = useCallback(
-    async (data: any) => {
+  const setAppUser = (data: AppUser) => {
+    setUser(data);
+  };
 
-      AuthService.setUpAxiosInterceptors(data)
-      setUser(data);
-      navigate("/auth/welcome", { replace: true });
-      
-     
-      
-    },
-    [setUser, navigate]
-  );
+  const login = useCallback(async (creds: LoginCredentials) => {
+    return AuthService.exectuteJwtAuthenticationService(creds);
+
+    // return axios.get("http://localhost:8081/basicauth", {
+    //   headers: { authorization: AuthService.createBasicAuthToken(data) },
+    // });
+  }, []);
 
   const logout = useCallback(() => {
     setUser(null);
@@ -65,6 +75,7 @@ export const AuthProvider = ({ children }: Props) => {
   const value = useMemo(
     () => ({
       user,
+      setAppUser,
       login,
       logout,
     }),
