@@ -1,0 +1,79 @@
+$colors: (
+        primary-blue-dark: #181924,
+        primary-blue-light: #1f2130,
+        primary-blue-three: #2c2e41,
+        primary-blue-four: #1B1C28,
+        secondary-blue: #246bfd,
+        tertiary-blue: #595de5,
+        blue-type-1: #2d6e93,
+        primary-grey: #6a6878,
+        secondary-grey: #73847f,
+        tertiary-grey: #494c67,
+        primary-yellow: #f3b619,
+        cream: #faf9ff,
+        pure: #fff,
+        gray: #979797,
+        danger: #f05a5a,
+);
+
+$themes: (
+        lightTheme: (
+                'color-1': map-get($colors, primary-blue-dark),
+                'color-2': map-get($colors, primary-blue-light),
+                'color-3': map-get($colors, secondary-blue),
+                'color-4': map-get($colors, tertiary-blue),
+                'color-5': map-get($colors, primary-grey),
+                'color-6': map-get($colors, secondary-grey),
+                'color-7': map-get($colors, cream),
+                'color-8': map-get($colors, pure),
+          //whole
+                'bg-color': map-get($colors, cream),
+          //authcomp
+                'authComp-bg': map-get($colors, pure),
+                'authComp-header': map-get($colors, primary-blue-light),
+                'authComp-google-btn': map-get($colors, secondary-grey),
+        ),
+        darkTheme: (
+                'color-1': map-get($colors, primary-blue-dark),
+                'color-2': map-get($colors, pure),
+                'color-3': map-get($colors, secondary-blue),
+                'color-4': map-get($colors, tertiary-blue),
+                'color-5': map-get($colors, primary-grey),
+                'color-6': map-get($colors, secondary-grey),
+                'color-7': map-get($colors, cream),
+                'color-8': map-get($colors, pure),
+          //whole
+                'bg-color': map-get($colors, primary-blue-dark),
+          //authcomp
+                'authComp-bg': map-get($colors, primary-blue-light),
+                'authComp-header': map-get($colors, pure),
+                'authComp-google-btn': map-get($colors, pure),
+        ),
+);
+
+@mixin theme() {
+  @each $theme, $map in $themes {
+    $theme-map: $map !global;
+    .#{$theme} & {
+      @content;
+    }
+  }
+  $theme-map: null !global;
+}
+
+@function theme-get($key) {
+  @return map-get($theme-map, $key);
+}
+
+$auth-factor: 0.6;
+
+$text-input-factor: 0.6;
+
+$distribution-graph: 0.9;
+
+$distribution-graph-two: 0.9;
+
+$stu-leaderboard-card: 0.9;
+
+$stu-paper-results-card: 0.8;
+

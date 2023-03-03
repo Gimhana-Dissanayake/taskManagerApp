@@ -1,7 +1,8 @@
-export interface UpdateTodoDto {
-  id: number | null;
+export interface UpdateTodoDTO {
+  id: number;
+  todoTitle: string;
   username: string;
   description: string;
-  targetDate: Date;
+  targetDate: string;
   done: boolean;
 }

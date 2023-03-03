@@ -1,0 +1,67 @@
+@import "~bootstrap/scss/bootstrap";
+@import "react-datepicker/dist/react-datepicker.css";
+
+*{
+
+    line-height: 1;
+}
+
+.active{
+    font-weight: 600;
+}
+
+td {
+    cursor: pointer;
+}
+
+.move-right {
+    position: absolute;
+    right: 0;
+}
+
+
+.move-left {
+    position: absolute;
+    left: 0;
+}
+
+.bth-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.bth-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .btn-google {
+    color: white !important;
+    background-color: #ea4335;
+  }
+  
+  .btn-facebook {
+    color: white !important;
+    background-color: #3b5998;
+  }
+
+  .nav-pills .nav-link.active{
+    background-color: #d9b5b9 !important;
+  }

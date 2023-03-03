@@ -1,10 +1,10 @@
-import { CreateTodoDto } from "../dtos/CreateTodoDto";
+import { CreateTodoDTO } from "../dtos/CreateTodoDTO";
 import { isDate, isStringEmpty } from "../util";
 
 class Validations {
   private _validatedResult: { propertyName: string; error: string }[] = [];
 
-  public validateCreateTodo = (createTodoDto: CreateTodoDto) => {
+  public validateCreateTodo = (createTodoDto: CreateTodoDTO) => {
     const isDescriptionEmpty = isStringEmpty(createTodoDto.description);
 
     const isDateValid = isDate(createTodoDto.targetDate);
@@ -30,4 +30,6 @@ class Validations {
   };
 }
 
-export default new Validations();
+const obj = new Validations();
+
+export default obj;

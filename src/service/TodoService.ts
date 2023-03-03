@@ -1,28 +1,26 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
-import { CreateTodoDto } from "../dtos/CreateTodoDto";
-import { UpdateTodoDto } from "../dtos/UpdateTodoDto";
+import { CreateTodoDTO } from "../dtos/CreateTodoDTO";
+import { EditTodoDTO } from "../dtos/EditTodoDTO";
 
 class TodoService {
-  getTodos() {
-    return axios.get(`${BASE_URL}/jimmy/todos`);
-  }
-
-  getTodosById(id: number) {
-    return axios.get(`${BASE_URL}/jimmy/todos/${id}`);
+  getTodos(username: string) {
+    return axios.get(`${BASE_URL}/todo/${username}`);
   }
 
   deleteTodo(id: number) {
-    return axios.delete(`${BASE_URL}/jimmy/todos/${id}`);
+    return axios.delete(`${BASE_URL}/todo/${id}`);
   }
 
-  updateTodo(id: number, todo: UpdateTodoDto) {
-    return axios.put(`${BASE_URL}/jimmy/todos/${id.toString()}`, todo);
+  updateTodo(todo: EditTodoDTO) {
+    return axios.put(`${BASE_URL}/todo/update`, todo);
   }
 
-  createTodo(todo: CreateTodoDto) {
-    return axios.post(`${BASE_URL}/jimmy/todos`, todo);
+  createTodo(todo: CreateTodoDTO) {
+    return axios.post(`${BASE_URL}/todo/add`, todo);
   }
 }
 
-export default new TodoService();
+const obj = new TodoService();
+
+export default obj;

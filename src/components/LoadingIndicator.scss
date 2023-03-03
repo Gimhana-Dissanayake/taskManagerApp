@@ -1,0 +1,99 @@
+@import './../variables';
+
+/* com-progress Bar */
+.com-progress {
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #3428db21;
+  border-radius: 2px;
+  background-clip: padding-box;
+  margin: 0.5rem 0 1rem 0;
+  overflow: hidden;
+}
+.com-progress .com-indeterminate {
+  background-color: #99749D;
+  width: 100%;
+}
+.com-progress .com-indeterminate:before {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: com-indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  animation: com-indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+.com-progress .com-indeterminate:after {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: com-indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation: com-indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -webkit-animation-delay: 1.15s;
+  animation-delay: 1.15s;
+}
+
+@-webkit-keyframes com-indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@keyframes com-indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-webkit-keyframes com-indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@keyframes com-indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}

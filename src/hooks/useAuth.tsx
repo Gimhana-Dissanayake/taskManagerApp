@@ -8,16 +8,16 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AppUser,
   LoginCredentials,
   USER_NAME_SESSION_ATTRIBUTE_NAME,
 } from "../constants";
+import User from "../models/User";
 import AuthService from "../service/AuthService";
 import { useLocalStorage } from "./useLocalStorage";
 
 type authContextType = {
-  user: any;
-  setAppUser: (creds: AppUser) => void;
+  user: User | null;
+  setAppUser: (creds: User) => void;
   login: (data: LoginCredentials) => Promise<AxiosResponse<any, any>>;
   logout: () => void;
 };
@@ -44,33 +44,18 @@ export const AuthProvider = ({ children }: Props) => {
   );
   const navigate = useNavigate();
 
-  const setAppUser = (data: AppUser) => {
+  const setAppUser = (data: User) => {
     setUser(data);
   };
 
   const login = useCallback(async (creds: LoginCredentials) => {
     return AuthService.exectuteJwtAuthenticationService(creds);
-
-    // return axios.get("http://localhost:8081/basicauth", {
-    //   headers: { authorization: AuthService.createBasicAuthToken(data) },
-    // });
   }, []);
 
   const logout = useCallback(() => {
     setUser(null);
     navigate("/", { replace: true });
   }, [setUser, navigate]);
-
-  // const login = async (data: any) => {
-  //   console.log("ABCCC ", data);
-  //   setUser(data);
-  //   navigate("/auth/welcome", { replace: true });
-  // };
-
-  // const logout = () => {
-  //   setUser(null);
-  //   navigate("/", { replace: true });
-  // };
 
   const value = useMemo(
     () => ({
